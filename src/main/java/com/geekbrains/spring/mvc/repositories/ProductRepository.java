@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,13 +29,12 @@ public class ProductRepository {
         Product product = Product.builder()
                 .uuid(UUID.fromString(uuid))
                 .build();
-        //Product product = productList.stream().filter((Product item) -> item.getId() == id).findFirst().orElse(null);
 
         return productList.remove(product);
     }
 
     public List<Product> getAll() {
-        return productList;
+        return Collections.unmodifiableList(productList);
     }
 
     public Product getOne(String uuid) {
